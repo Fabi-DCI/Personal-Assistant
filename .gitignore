@@ -1,0 +1,28 @@
+# Virtual Environment
+venv/
+env/
+.env/
+
+# Database
+db.sqlite3
+
+# Django Migrations
+*/migrations/
+
+# Media and Static files
+media/
+static/
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+
+# Secrets
+.env
+secret_keys.py
+
+# Python Bytecode
+__pycache__/
+*.pyc
+*.pyo

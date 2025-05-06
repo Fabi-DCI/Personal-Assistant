@@ -1,0 +1,6 @@
+django
+openai
+pyttsx3
+schedule
+django-environ
+requests
