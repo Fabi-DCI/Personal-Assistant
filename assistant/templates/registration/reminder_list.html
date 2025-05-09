@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reminder List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-5">
+        <h1>Reminder List</h1>
+        {% if reminders %}
+            <ul class="list-group">
+                {% for reminder in reminders %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ reminder.title }}</span>
+                        <span class="badge bg-warning">{{ reminder.reminder_time }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No reminders found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
