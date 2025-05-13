@@ -9,7 +9,6 @@ class UserSettings(models.Model):
     voice_preference = models.BooleanField(default=False, help_text="Enable voice feedback.")
     task_notif_enabled = models.BooleanField(default=True, help_text="Enable task notifications.")
     
-    # Here we track when settings were created and updated (for me)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

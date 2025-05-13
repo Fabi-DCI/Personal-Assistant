@@ -10,6 +10,7 @@
         <h1 class="mb-4">Welcome, {{ user.username }}!</h1>
 
         <div class="row">
+            <!-- Tasks Card -->
             <div class="col-md-4 mb-3">
                 <div class="card shadow rounded-4">
                     <div class="card-body">
@@ -22,10 +23,12 @@
                             {% endfor %}
                         </ul>
                         <a href="{% url 'assistant:task_list' %}" class="btn btn-sm btn-outline-primary">View All Tasks</a>
+                        <a href="{% url 'assistant:add_task' %}" class="btn btn-sm btn-outline-success">Add Task</a>  <!-- Add Task Link -->
                     </div>
                 </div>
             </div>
 
+            <!-- Reminders Card -->
             <div class="col-md-4 mb-3">
                 <div class="card shadow rounded-4">
                     <div class="card-body">
@@ -42,6 +45,7 @@
                 </div>
             </div>
 
+            <!-- Today's Plan Card -->
             <div class="col-md-4 mb-3">
                 <div class="card shadow rounded-4">
                     <div class="card-body">

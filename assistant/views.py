@@ -66,3 +66,22 @@ def register(request):
 def user_logout(request):
     logout(request)
     return redirect('assistant:logout_success')
+
+from django.shortcuts import render, redirect
+from .forms import TaskForm
+from .models import Task
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def add_task(request):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.user = request.user
+            task.save()
+            return redirect('assistant:dashboard')
+    else:
+        form = TaskForm()
+    
+    return render(request, 'registration/add_task.html', {'form': form})

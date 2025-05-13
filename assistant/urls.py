@@ -15,4 +15,5 @@ urlpatterns = [
     path('tasks/', views.task_list, name='task_list'),
     path('reminders/', views.reminder_list, name='reminder_list'),
     path('admin/logged-in-users/', views.logged_in_users_view, name='logged_in_users'),
+    path('add-task/', views.add_task, name='add_task'),
 ]
