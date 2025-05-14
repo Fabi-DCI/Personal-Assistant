@@ -5,7 +5,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
 from django.utils.timezone import now
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, TaskForm
 from .models import Task, Reminder, DailyPlan
 from datetime import date
 
@@ -67,11 +67,6 @@ def user_logout(request):
     logout(request)
     return redirect('assistant:logout_success')
 
-from django.shortcuts import render, redirect
-from .forms import TaskForm
-from .models import Task
-from django.contrib.auth.decorators import login_required
-
 @login_required
 def add_task(request):
     if request.method == 'POST':
@@ -82,6 +77,6 @@ def add_task(request):
             task.save()
             return redirect('assistant:dashboard')
     else:
-        form = TaskForm()
-    
+        form = TaskForm(initial={'due_date': None})
+
     return render(request, 'registration/add_task.html', {'form': form})

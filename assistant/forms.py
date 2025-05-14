@@ -1,7 +1,5 @@
-# assistant/forms.py
 from django import forms
 from django.contrib.auth.models import User
-from django import forms
 from .models import Task
 
 class UserRegistrationForm(forms.ModelForm):
@@ -16,6 +14,10 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ['title', 'description', 'due_date', 'completed']
         widgets = {
-            'due_date': forms.DateInput(attrs={'type': 'date'}),
+            'due_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.due_date:
+            self.initial['due_date'] = self.instance.due_date.strftime('%Y-%m-%dT%H:%M')
