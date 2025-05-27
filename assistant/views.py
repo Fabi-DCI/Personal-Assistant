@@ -8,6 +8,7 @@ from django.utils.timezone import now
 from .forms import UserRegistrationForm, TaskForm
 from .models import Task, Reminder, DailyPlan
 from datetime import date
+from django.utils.dateparse import parse_date
 
 @login_required
 def today_plan(request):
@@ -41,13 +42,18 @@ def logout_success(request):
 
 @login_required
 def dashboard(request):
-    tasks = Task.objects.filter(user=request.user)
+    selected_date_str = request.GET.get('date')
+    selected_date = parse_date(selected_date_str) if selected_date_str else date.today()
+
+    tasks = Task.objects.filter(user=request.user, due_date=selected_date)
     reminders = Reminder.objects.filter(user=request.user).order_by('reminder_time')[:5]
-    daily_plan = DailyPlan.objects.filter(user=request.user, date=date.today()).first()
+    daily_plan = DailyPlan.objects.filter(user=request.user, date=selected_date).first()
+
     return render(request, 'registration/dashboard.html', {
         'tasks': tasks,
         'reminders': reminders,
-        'daily_plan': daily_plan
+        'daily_plan': daily_plan,
+        'selected_date': selected_date
     })
 
 def redirect_to_register(request):
